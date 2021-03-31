@@ -6,6 +6,9 @@ def matrixPrint(matrix, size: int) -> None:
 
 
 n = int(input("Enter a size of the matrix \n"))
+while n < 4 or n > 1000:
+    print("Entered size is out of possible range")
+    n = int(input("Enter a size of the matrix \n"))
 arr = [[0] * n for i in range(n)]
 elem_cnt = 1
 row_cnt = 0
