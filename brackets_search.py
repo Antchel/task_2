@@ -25,11 +25,12 @@ string = input("Enter a string \n")
 
 op_brackets, cl_brackets = brackets_validation()
 
-stack = []
+stack = {}
 print(cl_brackets)
 for element, i in enumerate(string):
     if i in op_brackets:
-        stack.append(i)
+        stack.update({element : i})
+        print(list(stack)[-1], stack[list(stack)[-1]])
     elif i in cl_brackets:
         if cl_brackets.index(i) == op_brackets[cl_brackets.index(i)]:
             stack.pop()
