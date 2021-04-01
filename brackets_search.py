@@ -18,20 +18,15 @@ def brackets_validation():
         exit(1)
     if len(false_brackets):
         print("NOTIFICATION! The next bracket(s) is(are) incorrect and was(were) removed", *false_brackets)
-    return set(possible_brackets), set(close_brackets)
+    return list(possible_brackets), list(close_brackets)
 
 
 string = input("Enter a string \n")
 
-rc = True
-
 op_brackets, cl_brackets = brackets_validation()
 
-op_brackets = list(op_brackets)
-cl_brackets = list(cl_brackets)
-
 stack = {}
-info = [rc, None, None]
+info = [True, None, None]
 
 for element, i in enumerate(string):
     if i in op_brackets:
@@ -43,9 +38,9 @@ for element, i in enumerate(string):
         if cl_brackets.index(i) == op_brackets.index(list(stack.values())[-1]):
             stack.popitem()
         else:
-            rc = False
-            info = [False, {i: element}, {list(stack)[-1]: stack[list(stack)[-1]]}]
+            info = [False, {i: element}, {stack[list(stack)[-1]]: list(stack)[-1] }]
             break
-if 0 != len(stack):
+if 0 != len(stack) and True == info[0]:
     info = [False, None, {list(stack)[-1]: stack[list(stack)[-1]]}]
+
 print(info[0], info[1], info[2], sep=', ')
